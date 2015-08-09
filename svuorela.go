@@ -7,7 +7,7 @@ import (
 )
 
 func outputData(w http.ResponseWriter, code int, value *string) {
-	w.Header().Set("Content-Type", "text/html; charset=UTF-8")
+	w.Header().Set("Content-Type", "text/plain; charset=UTF-8")
 	w.WriteHeader(code)
 	if value != nil {
 		w.Write([]byte(*value))
