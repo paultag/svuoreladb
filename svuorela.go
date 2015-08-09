@@ -1,11 +1,10 @@
 package main
 
 import (
+	"github.com/syndtr/goleveldb/leveldb"
 	"io/ioutil"
 	"log"
 	"net/http"
-
-	"github.com/syndtr/goleveldb/leveldb"
 )
 
 func outputData(w http.ResponseWriter, code int, value []byte) {
@@ -28,12 +27,6 @@ func main() {
 		switch req.Method {
 		case "GET":
 			data, _ := db.Get([]byte(req.URL.Path), nil)
-			// err is set when the key's not found
-			// if err != nil {
-			// 	log.Printf("%s\n", err)
-			// 	outputData(w, 500, nil)
-			// 	return
-			// }
 			outputData(w, 200, data)
 		case "POST":
 			data, err := ioutil.ReadAll(req.Body)
